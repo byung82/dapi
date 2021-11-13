@@ -105,6 +105,8 @@ const prefix = "f"
 
 func executeStatement(ctx context.Context, config *config, query, transactionID string, args ...driver.NamedValue) (*Result, error) {
 	query = nameParameters(prefix, query)
+	fmt.Println("Query", query)
+
 	input := &rdsdataservice.ExecuteStatementInput{
 		Database:              aws.String(config.database),
 		IncludeResultMetadata: aws.Bool(true),
@@ -116,8 +118,14 @@ func executeStatement(ctx context.Context, config *config, query, transactionID 
 		input.TransactionId = aws.String(transactionID)
 	}
 
+	fmt.Println("Args", len(args))
+
+
 	for _, arg := range args {
 		name := arg.Name
+
+		fmt.Println("name", name)
+
 		if name == "" {
 			name = prefix + strconv.Itoa(arg.Ordinal)
 		}
@@ -126,6 +134,8 @@ func executeStatement(ctx context.Context, config *config, query, transactionID 
 			Name:  aws.String(name),
 			Value: asField(arg.Value),
 		}
+
+		fmt.Println("param", param)
 
 		input.Parameters = append(input.Parameters, &param)
 	}

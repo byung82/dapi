@@ -1,4 +1,4 @@
-module github.com/savaki/dapi
+module github.com/byung82/dapi
 
 go 1.14
 
