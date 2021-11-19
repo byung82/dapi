@@ -50,6 +50,8 @@ func (r *Result) Next(dest []driver.Value) error {
 
 	for index, field := range r.records[0] {
 		v := valueOf(field)
+
+		fmt.Println("============================", v)
 		if s, ok := v.(string); ok {
 			if s == "" {
 				continue
@@ -70,6 +72,8 @@ func (r *Result) Next(dest []driver.Value) error {
 						layout = "06"
 					}
 				}
+
+				fmt.Println("============================v", typeName)
 
 				if layout != "" {
 					t, err := time.Parse(layout, s)
