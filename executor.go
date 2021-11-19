@@ -71,9 +71,11 @@ func (r *Result) Next(dest []driver.Value) error {
 					if len(s) == 2 {
 						layout = "06"
 					}
+				default:
+					fmt.Println("============================v", typeName)
+					break
 				}
 
-				fmt.Println("============================v", typeName)
 
 				if layout != "" {
 					t, err := time.Parse(layout, s)
