@@ -71,6 +71,10 @@ func (r *Result) Next(dest []driver.Value) error {
 					if len(s) == 2 {
 						layout = "06"
 					}
+				case "timestamp":
+					layout = "2006-01-02 15:04:05.999999"
+				case "timestamptz":
+					layout = "2006-01-02 15:04:05.999999"
 				default:
 					fmt.Println("============================v", typeName)
 					break
