@@ -111,7 +111,7 @@ func (r *Result) RowsAffected() (int64, error) {
 	return aws.Int64Value(r.output.NumberOfRecordsUpdated), nil
 }
 
-const prefix = "$"
+const prefix = "f"
 
 func executeStatement(ctx context.Context, config *config, query, transactionID string, args ...driver.NamedValue) (*Result, error) {
 	query = nameParameters(prefix, query)
