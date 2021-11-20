@@ -171,10 +171,14 @@ func nameParameters(prefix, query string) string {
 	var n int
 	for _, r := range query {
 		if r == '?' {
+			fmt.Println("========111")
 			n++
 			got = append(got, ':')
+			fmt.Println("========got1", got)
 			got = append(got, []rune(prefix)...)
+			fmt.Println("========got2", got)
 			got = append(got, []rune(strconv.Itoa(n))...)
+			fmt.Println("========got3", got)
 			continue
 		}
 		got = append(got, r)
