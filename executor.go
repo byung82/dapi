@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"io"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -114,8 +115,14 @@ func (r *Result) RowsAffected() (int64, error) {
 const prefix = "f"
 
 func executeStatement(ctx context.Context, config *config, query, transactionID string, args ...driver.NamedValue) (*Result, error) {
-	query = nameParameters(prefix, query)
+	if config.driver == "postgres" {
+		query = strings.ReplaceAll(query,"$", ":" + prefix)
+	} else {
+		query = nameParameters(prefix, query)
+	}
+
 	fmt.Println("Query", query)
+
 
 	input := &rdsdataservice.ExecuteStatementInput{
 		Database:              aws.String(config.database),
