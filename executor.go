@@ -115,7 +115,7 @@ func (r *Result) RowsAffected() (int64, error) {
 const prefix = "f"
 
 func executeStatement(ctx context.Context, config *config, query, transactionID string, args ...driver.NamedValue) (*Result, error) {
-	if config.driver == "postgres" {
+	if config.dbType == "postgres" {
 		query = strings.ReplaceAll(query,"$", ":" + prefix)
 	} else {
 		query = nameParameters(prefix, query)

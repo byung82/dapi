@@ -18,7 +18,7 @@ import "github.com/aws/aws-sdk-go/service/rdsdataservice/rdsdataserviceiface"
 
 type config struct {
 	api         rdsdataserviceiface.RDSDataServiceAPI
-	driver      string
+	dbType      string
 	database    string
 	secretARN   string
 	resourceARN string
